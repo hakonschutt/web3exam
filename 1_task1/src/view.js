@@ -2,6 +2,8 @@ const View = (function() {
   const DOMstrings = {
     appRoot: "#app-root",
     homeRoot: "#home-root",
+    feedHeader: "#feed-header",
+    feed: "#feed",
     navItem: {
       vg: "#vg-nav",
       nrk: "#nrk-nav",
@@ -17,7 +19,67 @@ const View = (function() {
     setPage(file, cb) {
       $(DOMstrings.appRoot).load(`content/${file}.html`, () => cb());
     },
-    getHomeCard(data, onClick) {
+    setFeedHeader(feed) {
+      const container = $("<div>");
+
+      const header = $("<h1>", { class: "jumbotron-heading" });
+      header.text(feed.title);
+
+      const para = $("<p>", { class: "lead text-muted" });
+      para.text(feed.description);
+
+      container.append(header);
+      container.append(para);
+
+      $(DOMstrings.feedHeader).append(container);
+    },
+    addFeedCard(data) {
+      const article = $("<article>", { class: "col-md-4" });
+      const card = $("<div>", { class: "card mb-4 box-shadow" });
+      const img = $("<img>", {
+        class: "card-img-top",
+        style: "height: 225px; width: 100%; display: block;",
+        src: data.img
+      });
+
+      card.append(img);
+
+      const cardBody = $("<div>", { class: "card-body" });
+      const header = $("<h3>");
+      header.text(data.title);
+
+      const para = $("<p>", { class: "card-text" }).text(data.description);
+
+      const author = $("<small>", { class: "card-text d-block text-muted" });
+      const authorStrong = $("<strong>").text("Author: ");
+      const authorName = $("<span>").text(data.author || "Unknown");
+      author.append([authorStrong, authorName]);
+
+      const published = $("<small>", { class: "card-text d-block text-muted" });
+      const publishedStrong = $("<strong>").text("Published: ");
+      const publishedDate = $("<span>").text(data.published);
+      published.append([publishedStrong, publishedDate]);
+
+      const btnGroup = $("<div>", { class: "btn-group d-block mt-3" });
+      const btn = $("<a>", {
+        class: "btn btn-sm btn-primary text-white",
+        href: data.link
+      }).text("Read more");
+
+      btnGroup.append(btn);
+
+      cardBody.append(header);
+      cardBody.append(para);
+      cardBody.append(author);
+      cardBody.append(published);
+      cardBody.append(btnGroup);
+
+      card.append(cardBody);
+      article.append(card);
+
+      $(DOMstrings.feed).append(article);
+    },
+    addHomeCard(data, onClick) {
       const container = $("<div>", { class: "card mb-4" });
       const cardHeader = $("<div>", { class: "card-header" });
       cardHeader.text(data.title);
@@ -53,10 +115,7 @@ const View = (function() {
       container.append(cardHeader);
       container.append(cardBody);
 
-      return container;
-    },
-    appeandHTMLToContainer(html, domString) {
-      $(domString).append(html);
+      $(DOMstrings.homeRoot).append(container);
     }
   };
 })();

@@ -1,7 +1,5 @@
 const Controller = (function($) {
-  const initVg = feed => {
-    console.log("VG");
-  };
+  const initVg = feed => {};
 
   const initNrk = feed => {
     console.log("NRK");
@@ -13,6 +11,10 @@ const Controller = (function($) {
 
   const initGoogle = feed => {
     console.log("GOOGLE");
+  };
+
+  const initFeedHeader = feed => {
+    View.setFeedHeader(feed);
   };
 
   const getFeed = function(id) {
@@ -41,8 +43,8 @@ const Controller = (function($) {
   const initHomePage = function() {
     const DOM = View.getDOMstrings();
 
-    const innerHtml = Module.getFeeds().map(feed => {
-      return View.getHomeCard(feed, event => {
+    Module.getFeeds().forEach(feed => {
+      View.addHomeCard(feed, event => {
         event.preventDefault();
 
         View.setPage(feed.file, () => {
@@ -50,12 +52,11 @@ const Controller = (function($) {
           $(DOM.navItem[feed.file]).addClass("active");
 
           const initFeed = getFeed(feed.id);
+          initFeedHeader(feed);
           initFeed(feed);
         });
       });
     });
-
-    View.appeandHTMLToContainer(innerHtml, View.getDOMstrings().homeRoot);
   };
 
   const setupNavigation = function() {
@@ -72,7 +73,8 @@ const Controller = (function($) {
           btn.addClass("active");
 
           const initFeed = getFeed(feed.id);
-          initFeed();
+          initFeedHeader(feed);
+          initFeed(feed);
         });
       });
     });
