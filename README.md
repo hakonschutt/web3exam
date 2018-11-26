@@ -18,11 +18,11 @@ Individual assignment Comments:
 
 In this task you will work with ajax to retrieve news sites' RSS (i.e. XML). You will create a web page where the user can through a menu (navigation bar and/or menu buttons) select news from different sources
 
-[Read more](https://vg.no)
+[Read more](https://github.com/hakonschutt/web3exam/blob/master/1_task1/README.md)
 
 ### Task 2 - Pokemon REST API JSON (50%)
 
 Create a Pokemon page that makes use of jQuery Ajax to retrieve JSON from the Pokemon REST API (links below).
 Use some time first to get to know the Pokemon REST API and find out what type of information that is possible to get out from the API.
 
-[Read more](https://vg.no)
+[Read more](https://github.com/hakonschutt/web3exam/blob/master/1_task2/README.md)

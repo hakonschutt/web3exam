@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- #START - Style imports -->
+    <link rel="stylesheet" type="text/css" href="src/assets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="src/assets/style.css">
+    <!-- #END -->
+
+    <title>RSS News</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="src/assets/rss.png" height="30" class="d-inline-block align-top" alt="">
+          <span class="text-white">News</span>
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#main-nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" id="vg-nav" href="#vg">VG</a></li>
+            <li class="nav-item"><a class="nav-link" id="nrk-nav" href="#nrk">NrK</a></li>
+            <li class="nav-item"><a class="nav-link" id="reddit-nav" href="#reddit">Reddit</a></li>
+            <li class="nav-item"><a class="nav-link" id="google-nav" href="#google">Google</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main id="app-root"></main>
+    <footer class="text-muted bg-dark p-5">
+      <div class="container">
+        <p className="text-white">New to RSS Feeds? <a href="https://www.lifewire.com/rss-101-3482781">Read more here</a>.</p>
+      </div>
+    </footer>
+    <div id="rss-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeRSSFeedModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <h1>TEST</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- #START - Bootstrap and jQuery import -->
+    <script src="src/imports/jquery-3.3.1.min.js"></script>
+    <script src="src/imports/popper.min.js"></script>
+    <script src="src/imports/bootstrap.min.js"></script>
+    <!-- #END -->
+
+    <!-- #START - Script imports -->
+    <script src="src/module.js"></script>
+    <script src="src/view.js"></script>
+    <script src="src/controller.js"></script>
+    <script src="src/app.js"></script>
+    <!-- #END -->
+  </body>
+</html>
