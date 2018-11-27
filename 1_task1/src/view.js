@@ -2,6 +2,7 @@ const View = (function() {
   const DOMstrings = {
     appRoot: "#app-root",
     homeRoot: "#home-root",
+    homeBtn: "#home-btn",
     feedAlert: "#feed-alert",
     feedHeader: "#feed-header",
     feed: "#feed",
@@ -33,11 +34,10 @@ const View = (function() {
     setFeedHeader(feed) {
       const container = $("<div>");
 
-      const header = $("<h1>", { class: "jumbotron-heading" });
-      header.text(feed.title);
-
-      const para = $("<p>", { class: "lead text-muted" });
-      para.text(feed.description);
+      const header = $("<h1>", { class: "jumbotron-heading" }).text(feed.title);
+      const para = $("<p>", { class: "lead text-muted" }).text(
+        feed.description
+      );
 
       container.append(header);
       container.append(para);
@@ -59,8 +59,7 @@ const View = (function() {
       }
 
       const cardBody = $("<div>", { class: "card-body" });
-      const header = $("<h3>");
-      header.text(data.title);
+      const header = $("<h3>").text(data.title);
 
       const para = $("<p>", { class: "card-text" }).text(data.description);
 
@@ -109,13 +108,13 @@ const View = (function() {
       });
 
       const mediaBody = $("<div>", { class: "media-body" });
-      const para = $("<p>", { class: "card-text" });
-      para.text(data.description);
+      const para = $("<p>", { class: "card-text" }).text(data.description);
 
       const link = $("<a>", {
         class: "btn btn-primary float-right",
         href: "#0"
       });
+
       link.text("Go to feed");
       link.on("click", onClick);
 

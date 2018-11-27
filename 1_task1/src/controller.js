@@ -1,29 +1,30 @@
 const Controller = (function($) {
-  const makeXMLRequest = (link, cb) => {
-    $.ajax({
-      method: "GET",
-      dataType: "XML",
-      url: link
-    })
-      .done(xmlResponse => {
-        console.log(xmlResponse);
-        cb(false, xmlResponse);
+  const makeXMLRequest = link => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        method: "GET",
+        dataType: "XML",
+        url: link
       })
-      .fail(err => {
-        cb(true, "Could not fetch feed");
-      });
+        .done(xmlResponse => {
+          resolve(xmlResponse);
+        })
+        .fail(err => {
+          reject(err);
+        });
+    });
   };
 
   const initFeed = (feed, xmlToView) => {
-    makeXMLRequest(feed.link, (gotError, response) => {
-      if (!gotError) {
+    makeXMLRequest(feed.link)
+      .then(response => {
         xmlToView(response);
-      } else {
+      })
+      .catch(err => {
         View.setFeedAlert(
           "Could not fetch RSS news feed, please try again later"
         );
-      }
-    });
+      });
   };
 
   const xmlToViewForVgFeed = response => {
@@ -157,6 +158,15 @@ const Controller = (function($) {
           View.setFeedHeader(feed);
           initFeed(feed, getXmlToViewFunction(feed.id));
         });
+      });
+    });
+
+    $(DOM.homeBtn).on("click", event => {
+      event.preventDefault();
+
+      View.setPage("home", () => {
+        removeActiveClass();
+        initHomePage();
       });
     });
   };
