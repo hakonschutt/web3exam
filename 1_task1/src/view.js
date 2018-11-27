@@ -2,6 +2,7 @@ const View = (function() {
   const DOMstrings = {
     appRoot: "#app-root",
     homeRoot: "#home-root",
+    feedAlert: "#feed-alert",
     feedHeader: "#feed-header",
     feed: "#feed",
     navItem: {
@@ -18,6 +19,16 @@ const View = (function() {
     },
     setPage(file, cb) {
       $(DOMstrings.appRoot).load(`content/${file}.html`, () => cb());
+    },
+    setFeedAlert(warning) {
+      const alert = $("<div>", { class: "alert alert-danger" });
+      const header = $("<h4>", { class: "alert-heading" }).text("Ooops!");
+      const info = $("<p>").text(warning);
+
+      alert.append(header);
+      alert.append(info);
+
+      $(DOMstrings.feedAlert).html(alert);
     },
     setFeedHeader(feed) {
       const container = $("<div>");
@@ -36,13 +47,16 @@ const View = (function() {
     addFeedCard(data) {
       const article = $("<article>", { class: "col-md-4" });
       const card = $("<div>", { class: "card mb-4 box-shadow" });
-      const img = $("<img>", {
-        class: "card-img-top",
-        style: "height: 225px; width: 100%; display: block;",
-        src: data.img
-      });
 
-      card.append(img);
+      if (data.img) {
+        const img = $("<img>", {
+          class: "card-img-top",
+          style: "height: 225px; width: 100%; display: block;",
+          src: data.img
+        });
+
+        card.append(img);
+      }
 
       const cardBody = $("<div>", { class: "card-body" });
       const header = $("<h3>");
@@ -86,6 +100,7 @@ const View = (function() {
 
       const cardBody = $("<div>", { class: "card-body" });
       const media = $("<div>", { class: "media" });
+
       const img = $("<img>", {
         src: data.img,
         class: "align-self-center mr-5",
