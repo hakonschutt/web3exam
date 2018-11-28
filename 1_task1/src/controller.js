@@ -126,6 +126,7 @@ const Controller = (function($) {
 
   const initHomePage = function() {
     const DOM = View.getDOMstrings();
+    removeActiveClass();
 
     Module.getFeeds().forEach(feed => {
       View.addHomeCard(feed, event => {
@@ -163,21 +164,14 @@ const Controller = (function($) {
 
     $(DOM.homeBtn).on("click", event => {
       event.preventDefault();
-
-      View.setPage("home", () => {
-        removeActiveClass();
-        initHomePage();
-      });
+      View.setPage("home", initHomePage);
     });
   };
 
   return {
     init() {
       setupNavigation();
-
-      View.setPage("home", () => {
-        initHomePage();
-      });
+      View.setPage("home", initHomePage);
     }
   };
 })(jQuery);
