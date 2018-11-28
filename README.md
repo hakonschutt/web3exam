@@ -3,6 +3,7 @@
 ## Part 1
 
 Individual assignment Comments:
+
 - The main technologies of this assignment are Bootstrap, jQuery Ajax methods, XML and JSON
 - Notice that you will also be graded on things like code structure, tidiness, good use of comments in code etc.
 - It is an assignment where complexity and size of solution is of importance to the grade.
@@ -26,3 +27,28 @@ Create a Pokemon page that makes use of jQuery Ajax to retrieve JSON from the Po
 Use some time first to get to know the Pokemon REST API and find out what type of information that is possible to get out from the API.
 
 [Read more](https://github.com/hakonschutt/web3exam/blob/master/1_task2/README.md)
+
+## Part 2
+
+Overview
+
+- In this assignment you will make use of the following main technologies:
+  - React (front end)
+    - Bootstrap
+    - Ajax (jQuery and/or vanilla)
+  - .NET/C# Web API (backend)
+    - XML file(s) as the database
+  - JSON: sent with Ajax call to Web API, and sent back to web page from the Web API
+- You are creating two separate projects that interact:
+  1.  A React project that sends Ajax calls to a Web API made by you (point 2 just below) to make the Web API perform CRUD operations
+  1.  A Web API project that has an XML file (as a database) which it makes CRUD operations on
+- What you are to deliver of files:
+  - React: Only the public folder and the src folder; i.e. the folders containing the files where you code
+  - Web API: The entire Web API project folder
+
+### Task 1 - Police case
+
+The police need an application to better handle their cases.
+Make an application for the police to handle cases. They need to be able to register, delete, edit and display cases.
+
+[Read more](https://github.com/hakonschutt/web3exam/blob/master/2_task1/README.md)
