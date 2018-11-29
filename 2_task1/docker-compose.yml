@@ -4,6 +4,19 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    depends_on:
+      - api
+    environment:
+      - NODE_ENV=development
   nginx:
     restart: always
     build:
@@ -13,3 +26,4 @@ services:
       - '3050:8080'
     depends_on:
       - api
+      - client
