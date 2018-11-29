@@ -24,7 +24,16 @@ namespace api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+          services.AddCors(
+            options => { options.AddPolicy("AllowAnyOrigin",
+              builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+              );
+            }
+          );
+          services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -34,6 +43,7 @@ namespace api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAnyOrigin");
             app.UseMvc();
         }
     }
