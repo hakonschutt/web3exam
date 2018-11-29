@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - '3050:8080'
+    depends_on:
+      - api

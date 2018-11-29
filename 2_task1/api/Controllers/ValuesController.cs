@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PoliceCaseApi.Controllers
+namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
