@@ -8,8 +8,7 @@ namespace api.Repositories
     {
         User GetById(Guid id);
         List<User> GetAll();
-        void Remove();
-        bool Update(Guid id, User user);
+        bool Remove(Guid id);
         bool Save(User user);
     }
 }

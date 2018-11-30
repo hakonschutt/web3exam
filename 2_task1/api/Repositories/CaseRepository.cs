@@ -9,7 +9,7 @@ namespace api.Repositories
     {
         public CaseRepository(){}
 
-        public Case GetById(int id) {
+        public Case GetById(Guid id) {
           return null;
         }
 
@@ -17,11 +17,11 @@ namespace api.Repositories
           return new List<Case>();
         }
 
-        public void Remove() {
-          return;
+        public bool Remove() {
+          return true;
         }
 
-        public bool Update(int id, Case user) {
+        public bool Update(Guid id, Case user) {
           return true;
         }
 

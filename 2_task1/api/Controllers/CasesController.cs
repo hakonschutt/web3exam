@@ -14,22 +14,22 @@ namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class CasesController : ControllerBase
     {
 
-        private readonly IUserRepository _userRepository;
+        private readonly ICaseRepository _caseRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(ICaseRepository caseRepository)
         {
-            _userRepository = userRepository;
+            _caseRepository = caseRepository;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        public ActionResult<IEnumerable<Case>> Get()
         {
           try
           {
-              return StatusCode(200, _userRepository.GetAll());
+              return StatusCode(200, _caseRepository.GetAll());
           }
           catch (Exception ex)
           {
@@ -38,17 +38,17 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<User> Get(Guid id)
+        public ActionResult<Case> Get(Guid id)
         {
             try
             {
-                var user = _userRepository.GetById(id);
+                var case = _caseRepository.GetById(id);
 
-                if (user == null) {
+                if (case == null) {
                     return StatusCode(404, null);
                 }
 
-                return StatusCode(200, user);
+                return StatusCode(200, case);
             }
             catch (Exception ex)
             {
@@ -57,14 +57,14 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User> Post([FromBody] User user)
+        public ActionResult<Case> Post([FromBody] Case case)
         {
           try
           {
-              user.id = new Guid();
+              case.id = new Guid();
 
-              if (_userRepository.Save(user)) {
-                return StatusCode(201, user);
+              if (_caseRepository.Save(case)) {
+                return StatusCode(201, case);
               } else {
                 return StatusCode(422, null);
               }
@@ -75,12 +75,29 @@ namespace api.Controllers
           }
         }
 
+        [HttpPut("{id}")]
+        public ActionResult<bool> Put(Guid id, [FromBody] Case case)
+        {
+            try
+            {
+                if (_caseRepository.Update(id, case)) {
+                  return StatusCode(200, case);
+                } else {
+                  return StatusCode(422, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         public ActionResult<bool> Delete(Guid id)
         {
             try
             {
-                if (_userRepository.Remove(id)) {
+                if (_caseRepository.Remove(id)) {
                   return StatusCode(200, null);
                 } else {
                   return StatusCode(404, null);

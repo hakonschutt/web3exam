@@ -9,15 +9,6 @@ namespace api.Models
 {
 	public class User
 	{
-		public User(Guid userId, string userName, string userEmail, string userPassword, bool isDisabled)
-		{
-			id = userId;
-			name = userName;
-			email = userEmail;
-			password = userPassword;
-			disabled = isDisabled;
-		}
-
 		public Guid id { get; set; }
     public string name { get; set; }
     public string email { get; set; }

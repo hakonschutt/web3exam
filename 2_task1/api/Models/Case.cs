@@ -9,16 +9,10 @@ namespace api.Models
 {
 	public class Case
 	{
-		public Case()
-		{
-			CreationTime = DateTime.Now.ToString(new CultureInfo("no-NO"));
-		}
-
-		public Guid Id { get; set; }
+		public Guid id { get; set; }
     public string title { get; set; }
     public string description { get; set; }
-    public List<User> persons { get; set; }
-		public string CreationTime { get; set; }
+    public List<string> persons { get; set; }
 		public bool isSolved { get; set; }
 	}
 }

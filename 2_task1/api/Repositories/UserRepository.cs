@@ -9,29 +9,52 @@ namespace api.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        private readonly UserConverter _userConverter;
+
+        public UserRepository()
+        {
+            _userConverter = new UserConverter();
+        }
+
         public User GetById(Guid id) {
-          XElement usersXMLFile = XElement.Load("xml/users.xml");
+          XElement xmlFile = XElement.Load("xml/users.xml");
 
-          var selectedUser = (from user in usersXMLFile.Descendants("user")
-                          where user.Element("id").Equals(id)
-                          select user).SingleOrDefault();
-
-          return new UserConverter().transform(selectedUser);
+          return xmlFile.Descendants("user")
+                        .Where(n => id.Equals((Guid) n.Element("id")))
+                        .Select(n => _userConverter.transform(n))
+                        .SingleOrDefault();
         }
 
         public List<User> GetAll() {
-          return new List<User>();
+          XElement xmlFile = XElement.Load("xml/users.xml");
+
+          return xmlFile.Descendants("user")
+                        .Select(u => _userConverter.transform(u))
+                        .ToList();
         }
 
-        public void Remove() {
-          return;
-        }
+        public bool Remove(Guid id) {
+          XElement xmlFile = XElement.Load("xml/users.xml");
 
-        public bool Update(Guid id, User user) {
+          var user = xmlFile.Descendants("user")
+                            .Where(n => id.Equals((Guid) n.Element("id")))
+                            .SingleOrDefault();
+
+          if (user.IsEmpty) return false;
+
+          user.Remove();
+          xmlFile.Save("xml/users.xml");
+
           return true;
         }
 
         public bool Save(User user) {
+          XElement xmlFile = XElement.Load("xml/users.xml");
+          XElement newUser = _userConverter.transformXml(user);
+
+          xmlFile.Add(newUser);
+          xmlFile.Save("xml/users.xml");
+
           return true;
         }
     }

@@ -13,15 +13,15 @@ namespace api.Converters
 	{
     public User transform(XElement user)
     {
-      if (user == null) return null;
+			if (user.IsEmpty) return null;
 
-      return new User(
-        (Guid) user.Element("id"),
-        (string) user.Element("name"),
-        (string) user.Element("email"),
-        (string) user.Element("password"),
-        (bool) user.Element("disabled")
-      );
+      return new User() {
+				id = (Guid) user.Element("id"),
+        name = (string) user.Element("name"),
+        email = (string) user.Element("email"),
+        password = (string) user.Element("password"),
+        disabled = (bool) user.Element("disabled")
+			};
     }
 
     public XElement transformXml(User user)
