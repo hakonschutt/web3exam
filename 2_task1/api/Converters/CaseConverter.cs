@@ -9,32 +9,38 @@ using api.Models;
 
 namespace api.Converters
 {
-	public class CaseConverter
+	public interface ICaseConverter
 	{
-    public Case transform(XElement case)
-    {
-			if (case.IsEmpty) return null;
+		Case transform(XElement c);
+		XElement transformXml(Case c);
+	}
 
-      return new Case() {
-        id = (Guid) case.Element("id"),
-        title = (string) case.Element("name"),
-        description = (string) case.Element("description"),
-        persons = (List<string>) case.Descendants("person")
-                                     .Select(u => u.ToString())
-                                     .ToList(),
-    		isSolved = (string) case.Element("isSolved"),
-			};
-    }
+	public class CaseConverter : ICaseConverter
+	{
+        public Case transform(XElement c)
+        {
+    			if (c.IsEmpty) return null;
 
-    public XElement transformXml(Case case)
-    {
-      return new XElement("case",
-        new XElement("id", case.id),
-        new XElement("title", case.title),
-        new XElement("description", case.description),
-        new XElement("persons", case.persons.ConvertAll<string>( a => new XElement("person", a ))),
-        new XElement("isSolved", case.isSolved)
-      );
-    }
+          return new Case() {
+            id = (Guid) c.Element("id"),
+            title = (string) c.Element("title"),
+            description = (string) c.Element("description"),
+            persons = (List<string>) c.Descendants("person")
+                                      .Select(u => u.Value)
+                                      .ToList(),
+        		isSolved = (bool) c.Element("isSolved")
+    			};
+        }
+
+        public XElement transformXml(Case c)
+        {
+          return new XElement("case",
+            new XElement("id", c.id),
+            new XElement("title", c.title),
+            new XElement("description", c.description),
+            new XElement("persons", c.persons.ConvertAll<XElement>( a => new XElement("person", a ))),
+            new XElement("isSolved", c.isSolved)
+          );
+        }
 	}
 }

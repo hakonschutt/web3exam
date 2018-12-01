@@ -9,7 +9,13 @@ using api.Models;
 
 namespace api.Converters
 {
-	public class UserConverter
+	public interface IUserConverter
+	{
+		User transform(XElement user);
+		XElement transformXml(User user);
+	}
+
+	public class UserConverter : IUserConverter
 	{
     public User transform(XElement user)
     {
@@ -18,7 +24,7 @@ namespace api.Converters
       return new User() {
 				id = (Guid) user.Element("id"),
         name = (string) user.Element("name"),
-        email = (string) user.Element("email"),
+        username = (string) user.Element("username"),
         password = (string) user.Element("password"),
         disabled = (bool) user.Element("disabled")
 			};
@@ -29,7 +35,7 @@ namespace api.Converters
       return new XElement("user",
         new XElement("id", user.id),
         new XElement("name", user.name),
-        new XElement("email", user.email),
+        new XElement("username", user.username),
         new XElement("password", user.password),
         new XElement("disabled", user.disabled)
       );

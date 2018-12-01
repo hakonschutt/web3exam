@@ -66,7 +66,6 @@ const Controller = (function($) {
     makeRequest(url)
       .then(response => {
         const data = formatResponse(itemId, response);
-        console.log(data);
         View.setModalBody(data, itemId);
       })
       .catch(err => {

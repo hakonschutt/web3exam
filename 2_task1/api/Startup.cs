@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using api.Repositories;
 
 namespace api
@@ -34,6 +38,7 @@ namespace api
               );
             }
           );
+
           services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
           ConfigureRepositories(services);
         }

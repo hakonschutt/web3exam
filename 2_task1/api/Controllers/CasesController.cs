@@ -19,7 +19,7 @@ namespace api.Controllers
 
         private readonly ICaseRepository _caseRepository;
 
-        public UsersController(ICaseRepository caseRepository)
+        public CasesController(ICaseRepository caseRepository)
         {
             _caseRepository = caseRepository;
         }
@@ -42,13 +42,13 @@ namespace api.Controllers
         {
             try
             {
-                var case = _caseRepository.GetById(id);
+                var c = _caseRepository.GetById(id);
 
-                if (case == null) {
+                if (c == null) {
                     return StatusCode(404, null);
                 }
 
-                return StatusCode(200, case);
+                return StatusCode(200, c);
             }
             catch (Exception ex)
             {
@@ -57,14 +57,31 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Case> Post([FromBody] Case case)
+        public ActionResult<Case> Post([FromBody] Case c)
         {
           try
           {
-              case.id = new Guid();
+              c.id = new Guid();
 
-              if (_caseRepository.Save(case)) {
-                return StatusCode(201, case);
+              if (_caseRepository.Save(c)) {
+                return StatusCode(201, c);
+              } else {
+                return StatusCode(422, null);
+              }
+          }
+          catch (Exception ex)
+          {
+              return StatusCode(500, ex.Message);
+          }
+        }
+
+        [HttpPost("{id}/persons")]
+        public ActionResult<bool> PostPerson(Guid id, [FromBody] string data)
+        {
+          try
+          {
+              if (_caseRepository.AddPerson(id, data)) {
+                return StatusCode(201, null);
               } else {
                 return StatusCode(422, null);
               }
@@ -76,12 +93,12 @@ namespace api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(Guid id, [FromBody] Case case)
+        public ActionResult<Case> Put(Guid id, [FromBody] Case c)
         {
             try
             {
-                if (_caseRepository.Update(id, case)) {
-                  return StatusCode(200, case);
+                if (_caseRepository.Update(id, c)) {
+                  return StatusCode(200, c);
                 } else {
                   return StatusCode(422, null);
                 }
