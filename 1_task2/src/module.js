@@ -1,5 +1,16 @@
+/**
+ * Module controller is responsiable for holding all data relevant to the application
+ * @return { Object } - Module
+ */
 const Module = (function() {
+  /**
+   * Public functions
+   */
   return {
+    /**
+     * Returns all Pokemon api data
+     * @return { Array } - Pokemon data
+     */
     getData() {
       return [
         {
@@ -34,6 +45,10 @@ const Module = (function() {
         }
       ];
     },
+    /**
+     * Return DOM strings used to append actions and html
+     * @return {Objct} DOM strings
+     */
     getDOMstrings() {
       return {
         appRoot: "#app-root",

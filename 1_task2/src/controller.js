@@ -1,4 +1,13 @@
+/**
+ * Controller is responsiable for controlling all application state and actions
+ * @return { Object } - Controller
+ */
 const Controller = (function($) {
+  /**
+   * Creates ajax request
+   * @params { String } - url - Url to request data from
+   * @return { Promise }
+   */
   const makeRequest = url => {
     return new Promise((resolve, reject) => {
       $.ajax({
@@ -14,7 +23,11 @@ const Controller = (function($) {
         });
     });
   };
-
+  /**
+   * Formates response about pokeemon
+   * @params { Object } - data - Response data
+   * @return { Object }
+   */
   const formatPokemonResponse = data => {
     return {
       weight: data.weight,
@@ -25,7 +38,11 @@ const Controller = (function($) {
       moves: data.moves.map(m => m.move.name)
     };
   };
-
+  /**
+   * Formates response about Berry
+   * @params { Object } - data - Response data
+   * @return { Object }
+   */
   const formatBerryResponse = data => {
     return {
       firmness: data.firmness.name,
@@ -35,7 +52,11 @@ const Controller = (function($) {
       size: data.size
     };
   };
-
+  /**
+   * Formates response about Item
+   * @params { Object } - data - Response data
+   * @return { Object }
+   */
   const formatItemResponse = data => {
     return {
       category: data.category.name,
@@ -44,7 +65,12 @@ const Controller = (function($) {
       img: data.sprites.default
     };
   };
-
+  /**
+   * Formates response to data that View can use
+   * @params { Int } - id - Pokemon data type id
+   * @params { Object } - data - Response data
+   * @return { Object }
+   */
   const formatResponse = (id, data) => {
     switch (id) {
       case 0:
@@ -57,7 +83,13 @@ const Controller = (function($) {
         return null;
     }
   };
-
+  /**
+   * Creates single item click that can be used on feed item click
+   * @params { String } - name - Pokemon name
+   * @params { String } - url - fetch url
+   * @params { Int } - data - Pokemon data type id
+   * @return { Function }
+   */
   const singleItemClick = (name, url, itemId) => event => {
     event.preventDefault();
     View.openModal();
@@ -72,7 +104,9 @@ const Controller = (function($) {
         View.setModalError(`Could not fetch info about ${name}`);
       });
   };
-
+  /**
+   * Removes active class from header components
+   */
   const removeActiveClass = () => {
     const DOM = Module.getDOMstrings();
 
@@ -80,7 +114,9 @@ const Controller = (function($) {
       $(item.ids[0]).removeClass("active");
     });
   };
-
+  /**
+   * Initializes click events
+   */
   const setupEvents = function() {
     const items = Module.getData();
 
@@ -120,8 +156,13 @@ const Controller = (function($) {
       View.setPage("home", removeActiveClass);
     });
   };
-
+  /**
+   * Public functions
+   */
   return {
+    /**
+     * Initiates application
+     */
     init() {
       setupEvents();
 

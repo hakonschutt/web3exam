@@ -1,4 +1,13 @@
+/**
+ * View controller is responsiable to controlling the document/user view
+ * @return { Object } - View
+ */
 const View = (function() {
+  /**
+   * Constructs Pokemon modal html
+   * @params { Object } - Pokemon data
+   * @return { HTML } - Pokemon modal
+   */
   const getPokemonModalContent = data => {
     const container = $("<div>", { class: "p-1" });
     const wrapper = $("<div>", { class: "row" });
@@ -94,7 +103,11 @@ const View = (function() {
 
     return container;
   };
-
+  /**
+   * Constructs Berry modal html
+   * @params { Object } - Berry data
+   * @return { HTML } - Berry modal
+   */
   const getBerryModalContent = data => {
     const iterator = [
       { title: "Firmness", property: "firmness" },
@@ -136,7 +149,11 @@ const View = (function() {
 
     return container;
   };
-
+  /**
+   * Constructs Item modal html
+   * @params { Object } - Berry data
+   * @return { HTML } - Berry modal
+   */
   const getItemModalContent = data => {
     const container = $("<div>", { class: "p-1 row" });
     const imgWrapper = $("<div>", { class: "col-4" });
@@ -179,7 +196,12 @@ const View = (function() {
 
     return container;
   };
-
+  /**
+   * Constructs modal body html
+   * @params { Object } - Pokemon data id
+   * @params { Object } - modal data
+   * @return { HTML } - Modal body html
+   */
   const getModalBody = (id, data) => {
     switch (id) {
       case 0:
@@ -192,13 +214,25 @@ const View = (function() {
         return null;
     }
   };
-
+  /**
+   * Public functions
+   */
   return {
+    /**
+     * Sets app root content page
+     * @param {String} - file - file to get from content folder
+     * @param {Func} - cb - callback function
+     */
     setPage(file, cb) {
       $(Module.getDOMstrings().appRoot).load(`content/${file}.html`, () => {
         if (typeof cb === "function") cb();
       });
     },
+    /**
+     * Adds feeds card to html feed
+     * @param {String} - title - card title
+     * @param {Func} - onClick - card onClick function
+     */
     addFeedCard(title, onClick) {
       const container = $("<div>", { class: "col-md-3 my-2" });
 
@@ -216,6 +250,10 @@ const View = (function() {
 
       $(Module.getDOMstrings().feedRoot).append(container);
     },
+    /**
+     * Set Feed alert
+     * @param {String} - warning - Warning to print to feed
+     */
     setFeedAlert(warning) {
       const alert = $("<div>", { class: "alert alert-danger" });
       const header = $("<h4>", { class: "alert-heading" }).text("Ooops!");
@@ -226,6 +264,10 @@ const View = (function() {
 
       $(Module.getDOMstrings().feedAlert).html(alert);
     },
+    /**
+     * Set Feed jumbotron
+     * @param {Object} - data - Pokemon data type info
+     */
     setFeedHeader(data) {
       const container = $("<div>", { class: "clearfix" });
       const img = $("<img>", {
@@ -242,12 +284,23 @@ const View = (function() {
 
       $(Module.getDOMstrings().feedHeader).html(container);
     },
+    /**
+     * Open feed modal
+     */
     openModal() {
       $(Module.getDOMstrings().modal).modal("show");
     },
+    /**
+     * Set modal header
+     * @param {String} - title
+     */
     setModalTitle(title) {
       $(Module.getDOMstrings().modalTitle).text(title);
     },
+    /**
+     * Set modal error
+     * @param {String} - warning
+     */
     setModalError(warning) {
       const alert = $("<div>", { class: "alert alert-danger" });
       const info = $("<p>", { class: "mb-0" }).text(warning);
@@ -256,6 +309,11 @@ const View = (function() {
 
       $(Module.getDOMstrings().modalAlert).html(alert);
     },
+    /**
+     * Set modal Body
+     * @param {String} - itemType - item id
+     * @param {Object} - data - request data
+     */
     setModalBody(data, itemType) {
       const html = getModalBody(itemType, data);
 

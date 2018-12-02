@@ -4,7 +4,7 @@
  */
 const Controller = (function($) {
   /**
-   * Controller is responsiable for controlling all application state and actions
+   * Creates xml ajax request
    * @params { String } - link - Url to request data from
    * @return { Promise }
    */
