@@ -90,7 +90,7 @@ namespace api.Repositories
 
         public bool AddPerson(Guid id, string name) {
           XElement xmlFile = XElement.Load("xml/cases.xml");
-          
+
           XElement persons = xmlFile.Descendants("case")
                                    .Where(n => id.Equals((Guid)n.Element("id")))
                                    .SingleOrDefault()
