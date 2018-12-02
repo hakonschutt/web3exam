@@ -1,4 +1,13 @@
+/**
+ * Controller is responsiable for controlling all application state and actions
+ * @return { Object } - Controller
+ */
 const Controller = (function($) {
+  /**
+   * Controller is responsiable for controlling all application state and actions
+   * @params { String } - link - Url to request data from
+   * @return { Promise }
+   */
   const makeXMLRequest = link => {
     return new Promise((resolve, reject) => {
       $.ajax({
@@ -14,7 +23,11 @@ const Controller = (function($) {
         });
     });
   };
-
+  /**
+   * Initializes feed for the given response
+   * @params { Object } - feed - feed information
+   * @params { Function } - xmlToView - function for changing the xml to html
+   */
   const initFeed = (feed, xmlToView) => {
     makeXMLRequest(feed.link)
       .then(response => {
@@ -26,7 +39,10 @@ const Controller = (function($) {
         );
       });
   };
-
+  /**
+   * Initializes function for VG feed
+   * @params { Object } - response - response data from request
+   */
   const xmlToViewForVgFeed = response => {
     $(response)
       .find("item")
@@ -43,7 +59,10 @@ const Controller = (function($) {
         View.addFeedCard(data);
       });
   };
-
+  /**
+   * Initializes function for Nrk feed
+   * @params { Object } - response - response data from request
+   */
   const xmlToViewForNrkFeed = response => {
     $(response)
       .find("item")
@@ -62,7 +81,10 @@ const Controller = (function($) {
         View.addFeedCard(data);
       });
   };
-
+  /**
+   * Initializes function for Reddit feed
+   * @params { Object } - response - response data from request
+   */
   const xmlToViewForRedditFeed = response => {
     $(response)
       .find("entry")
@@ -81,7 +103,10 @@ const Controller = (function($) {
         View.addFeedCard(data);
       });
   };
-
+  /**
+   * Initializes function for Google feed
+   * @params { Object } - response - response data from request
+   */
   const xmlToViewForGoogleFeed = response => {
     $(response)
       .find("item")
@@ -100,8 +125,12 @@ const Controller = (function($) {
         View.addFeedCard(data);
       });
   };
-
-  const getXmlToViewFunction = function(id) {
+  /**
+   * Function for determening which function to call for xml respons
+   * @params { Int } - id - id of feed
+   * @return { Function } - xmlToView function
+   */
+  const getXmlToViewFunction = id => {
     switch (id) {
       case 0:
         return xmlToViewForVgFeed;
@@ -115,7 +144,9 @@ const Controller = (function($) {
         return null;
     }
   };
-
+  /**
+   * Removes active class from header components
+   */
   const removeActiveClass = () => {
     const DOM = View.getDOMstrings();
 
@@ -123,7 +154,9 @@ const Controller = (function($) {
       $(DOM.navItem[feed.file]).removeClass("active");
     });
   };
-
+  /**
+   * Initializes home page
+   */
   const initHomePage = function() {
     const DOM = View.getDOMstrings();
     removeActiveClass();
@@ -142,7 +175,9 @@ const Controller = (function($) {
       });
     });
   };
-
+  /**
+   * Initializes navigation
+   */
   const setupNavigation = function() {
     const DOM = View.getDOMstrings();
 
@@ -167,8 +202,13 @@ const Controller = (function($) {
       View.setPage("home", initHomePage);
     });
   };
-
+  /**
+   * Public functions
+   */
   return {
+    /**
+     * Initiates application
+     */
     init() {
       setupNavigation();
       View.setPage("home", initHomePage);

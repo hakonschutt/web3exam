@@ -1,4 +1,11 @@
+/**
+ * View controller is responsiable to controlling the document/user view
+ * @return { Object } - View
+ */
 const View = (function() {
+  /**
+   * Private variable
+   */
   const DOMstrings = {
     appRoot: "#app-root",
     homeRoot: "#home-root",
@@ -14,13 +21,31 @@ const View = (function() {
     }
   };
 
+  /**
+   * Public functions
+   */
   return {
+    /**
+     * Return DOM strings used to append actions and html
+     * @return {Objct} DOM strings
+     */
     getDOMstrings() {
       return DOMstrings;
     },
+
+    /**
+     * Sets app root content page
+     * @param {String} - file - file to get from content folder
+     * @param {Func} - cb - callback function
+     */
     setPage(file, cb) {
       $(DOMstrings.appRoot).load(`content/${file}.html`, () => cb());
     },
+
+    /**
+     * Set Feed alert
+     * @param {String} - warning - Warning to print to feed
+     */
     setFeedAlert(warning) {
       const alert = $("<div>", { class: "alert alert-danger" });
       const header = $("<h4>", { class: "alert-heading" }).text("Ooops!");
@@ -31,6 +56,11 @@ const View = (function() {
 
       $(DOMstrings.feedAlert).html(alert);
     },
+
+    /**
+     * Set Feed jumbotron
+     * @param {Object} - feed - Feed info
+     */
     setFeedHeader(feed) {
       const container = $("<div>");
 
@@ -44,6 +74,11 @@ const View = (function() {
 
       $(DOMstrings.feedHeader).append(container);
     },
+
+    /**
+     * Add Feed card for indevidual news
+     * @param {Object} - data - News info
+     */
     addFeedCard(data) {
       const article = $("<article>", { class: "col-md-4" });
       const card = $("<div>", { class: "card mb-4 box-shadow" });
@@ -92,6 +127,12 @@ const View = (function() {
 
       $(DOMstrings.feed).append(article);
     },
+
+    /**
+     * Adds home card with info about different RSS feeds.
+     * @param {Object} - data - RSS feed info
+     * @param {Func} - onClick - onClick function for rss feed
+     */
     addHomeCard(data, onClick) {
       const container = $("<div>", { class: "card mb-4" });
       const cardHeader = $("<div>", { class: "card-header" });

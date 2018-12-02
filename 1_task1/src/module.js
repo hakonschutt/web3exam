@@ -1,5 +1,16 @@
+/**
+ * Module controller is responsiable for holding all data relevant to the application
+ * @return { Object } - Module
+ */
 const Module = (function() {
+  /**
+   * Public functions
+   */
   return {
+    /**
+     * Returns all feed data
+     * @return { Array } - Feeds
+     */
     getFeeds() {
       return [
         {
