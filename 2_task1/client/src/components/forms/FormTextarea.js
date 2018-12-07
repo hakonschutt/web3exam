@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Single form textarea
+ */
 const FormTextarea = ({
   input,
   type,

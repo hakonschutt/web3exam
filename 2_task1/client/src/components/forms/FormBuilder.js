@@ -4,13 +4,22 @@ import PropTypes from "prop-types";
 
 import { FormField, Selector, Alert, FormTextarea } from "..";
 
+/**
+ * Builds form based of a config array
+ */
 class FormBuilder extends Component {
+  /**
+   * Call props componentMount function
+   */
   componentDidMount() {
     if (typeof this.props.componentMount === "function") {
       this.props.componentMount();
     }
   }
 
+  /**
+   * Render single config item (Field)
+   */
   renderFields() {
     const { formFields } = this.props;
 
@@ -40,6 +49,9 @@ class FormBuilder extends Component {
     });
   }
 
+  /**
+   * Init JSX
+   */
   render() {
     const { onSubmit, error } = this.props;
 

@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * Page Footer
+ */
+
 const Footer = () => {
   return (
     <footer className="text-muted bg-dark p-5">

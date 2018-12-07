@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Bootstrap Jumbotron
+ */
 const Jumbotron = ({ header, lead }) => {
   return (
     <section className="jumbotron jumbotron-fluid bg-light">

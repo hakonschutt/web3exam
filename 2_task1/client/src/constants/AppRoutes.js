@@ -9,6 +9,9 @@ import { connect } from "react-redux";
 import { loadablePage } from "../hocs";
 import AppWrapper from "./AppWrapper";
 
+/**
+ * Init of applications routes with react-router
+ */
 class AppRoutes extends Component {
   render() {
     return (

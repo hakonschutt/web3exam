@@ -6,9 +6,10 @@ import {
   DELETE_CASE
 } from "../actions/types";
 
+/**
+ * Case reducer for altering redux state of cases
+ */
 export default function(state = [], action) {
-  console.log(action);
-
   switch (action.type) {
     case FETCH_CASES:
       return action.payload;

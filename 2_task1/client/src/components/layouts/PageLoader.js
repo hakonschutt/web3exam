@@ -2,6 +2,9 @@ import React from "react";
 import { PacmanLoader } from "react-spinners";
 import PropTypes from "prop-types";
 
+/**
+ * PageLoader useed with loadablePage hocs for a better user experience
+ */
 const PageLoader = ({ color }) => {
   return (
     <div className="h-100 row align-items-center">

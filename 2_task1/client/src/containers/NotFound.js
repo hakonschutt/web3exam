@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * 404 not found page
+ */
 const NotFound = () => {
   return (
     <div

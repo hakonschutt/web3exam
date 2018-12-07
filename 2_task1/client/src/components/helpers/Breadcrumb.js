@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+/**
+ * Page breadcrumb component.
+ * Will show full path to current page with options of going back
+ */
 const Breadcrumb = ({ args }) => {
   return (
     <section className="bg-light">

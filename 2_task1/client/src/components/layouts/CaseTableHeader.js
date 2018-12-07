@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Static case table header
+ */
 const CaseTableHeader = () => {
   return (
     <thead>

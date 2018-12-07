@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Single form field
+ */
 const FormField = ({
   input,
   type,

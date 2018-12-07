@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../images/pencil-case.svg";
 
+/**
+ * Page header
+ */
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -27,11 +30,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// <ul className="navbar-nav mr-auto float-right">
-//   <li className="nav-item active">
-//     <a className="nav-link" href="#">
-//       Home <span class="sr-only">(current)</span>
-//     </a>
-//   </li>
-// </ul>;

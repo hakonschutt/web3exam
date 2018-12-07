@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Select from "react-select";
 import PropTypes from "prop-types";
 
+/**
+ * Creates dropdown selector by using react-select
+ */
 class Selector extends Component {
   handleChange(value) {
     const {

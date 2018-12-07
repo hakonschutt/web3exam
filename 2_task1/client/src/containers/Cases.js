@@ -13,6 +13,9 @@ import { fetchCases } from "../actions";
 
 const breadcrumbConfig = [{ active: false, to: "/", title: "Cases" }];
 
+/**
+ * Cases component for displaying all cases
+ */
 class Cases extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +25,10 @@ class Cases extends Component {
     };
   }
 
+  /**
+   * Fetches all cases when component did finish rendering
+   */
+
   componentDidMount() {
     this.props.fetchCases((gotError, msg) => {
       if (gotError) {
@@ -29,6 +36,10 @@ class Cases extends Component {
       }
     });
   }
+
+  /**
+   * Init of JSX
+   */
 
   render() {
     return (
@@ -53,6 +64,9 @@ class Cases extends Component {
   }
 }
 
+/**
+ * Maps redux state to component props
+ */
 function mapStateToProps({ cases }) {
   return { cases };
 }

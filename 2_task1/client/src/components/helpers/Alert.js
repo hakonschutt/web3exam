@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Global Alert banner
+ */
 const Alert = ({ type, msg }) => {
   if (!msg) return null;
 

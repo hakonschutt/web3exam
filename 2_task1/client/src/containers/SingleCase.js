@@ -6,6 +6,9 @@ import { Link, withRouter } from "react-router-dom";
 import { deleteCase } from "../actions";
 import { Alert } from "../components";
 
+/**
+ * Single case page, used for displaying a single case and providing user actions
+ */
 class SingleCase extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +25,9 @@ class SingleCase extends Component {
     };
   }
 
+  /**
+   * Init of creadcrumb
+   */
   componentDidMount() {
     const { id } = this.props.match.params;
 
@@ -36,6 +42,9 @@ class SingleCase extends Component {
     });
   }
 
+  /**
+   * Deletes case by calling deleteCase function from redux actions
+   */
   deleteCase() {
     const { id } = this.props.match.params;
 
@@ -50,6 +59,10 @@ class SingleCase extends Component {
       }
     });
   }
+
+  /**
+   * Init JSX
+   */
 
   render() {
     const { id } = this.props.match.params;
@@ -89,6 +102,9 @@ class SingleCase extends Component {
   }
 }
 
+/**
+ * Maps redux state to component props
+ */
 function mapStateToProps({ cases }) {
   return { cases };
 }

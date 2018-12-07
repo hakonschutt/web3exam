@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+/**
+ * Single case table row. Taks inn a full case object and creates row
+ */
 const CaseTableItem = ({ index, id, title, persons, isSolved }) => {
   return (
     <tr>

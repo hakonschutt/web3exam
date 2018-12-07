@@ -7,6 +7,10 @@ import { Jumbotron, PageContext, FormBuilder, Breadcrumb } from "../components";
 import { formValidation } from "../utils/form";
 import { updateCase } from "../actions";
 
+/**
+ * Form fields used to FormBuilder
+ */
+
 const formFields = [
   {
     label: "Title",
@@ -37,6 +41,10 @@ const formFields = [
   }
 ];
 
+/**
+ * Edit component for editing a case
+ */
+
 class EditCase extends Component {
   state = {
     breadcrumb: [],
@@ -48,6 +56,9 @@ class EditCase extends Component {
     }
   };
 
+  /**
+   * initialization of breadcrumb trail
+   */
   componentDidMount() {
     const { id } = this.props.match.params;
 
@@ -60,6 +71,10 @@ class EditCase extends Component {
     });
   }
 
+  /**
+   * On submit function for when the form is filled out and submitet
+   * Will push data to updateCase function in redux actions
+   */
   async onSubmit(fields) {
     const { id } = this.props.match.params;
 
@@ -78,6 +93,9 @@ class EditCase extends Component {
     });
   }
 
+  /**
+   * Twisted function to be called by FormBuilder for setting fields data upon rendering
+   */
   componentMount() {
     const { id } = this.props.match.params;
     const { cases } = this.props;
@@ -92,6 +110,9 @@ class EditCase extends Component {
     });
   }
 
+  /**
+   * Init JSX
+   */
   render() {
     const { handleSubmit } = this.props;
     const { breadcrumb } = this.state;
@@ -113,10 +134,17 @@ class EditCase extends Component {
   }
 }
 
+/**
+ * Validatee function for redux forms - will call formValidation from utils
+ */
+
 function validate(values) {
   return formValidation(values, formFields);
 }
 
+/**
+ * Maps redux state to component props
+ */
 function mapStateToProps({ cases }) {
   return { cases };
 }

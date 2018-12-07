@@ -7,6 +7,10 @@ import { Jumbotron, PageContext, FormBuilder, Breadcrumb } from "../components";
 import { formValidation } from "../utils/form";
 import { uploadCase } from "../actions";
 
+/**
+ * Form fields used to FormBuilder
+ */
+
 const formFields = [
   {
     label: "Title",
@@ -34,15 +38,27 @@ const formFields = [
   }
 ];
 
+/**
+ * Static breadcrumb config for Breadcrumb component
+ */
+
 const breadcrumbConfig = [
   { active: true, to: "/", title: "Cases" },
   { active: false, to: "/case/new", title: "New" }
 ];
 
+/**
+ * New casee component for creating a new case
+ */
+
 class NewCase extends Component {
   state = {
     error: ""
   };
+
+  /**
+   * On submit function for case form. Will call uploadCase function in redux actions
+   */
 
   onSubmit(fields) {
     const data = {
@@ -60,6 +76,9 @@ class NewCase extends Component {
     });
   }
 
+  /**
+   * Init JSX
+   */
   render() {
     const { handleSubmit } = this.props;
 
@@ -78,6 +97,10 @@ class NewCase extends Component {
     );
   }
 }
+
+/**
+ * Validatee function for redux forms - will call formValidation from utils
+ */
 
 function validate(values) {
   return formValidation(values, formFields);
