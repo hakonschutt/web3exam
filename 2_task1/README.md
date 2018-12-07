@@ -26,3 +26,25 @@ A case may for example be a robbery, assault, traffic incidence etc.
 - Amount of functionality
 - Complexity of functionality
 - Working solution
+
+## How to run
+
+The project uses docker to run. Make sure you have docker installed.
+
+run:
+
+```
+docker-compose up --build -V
+```
+
+Then the site will be available on [localhost](http://localhost:3050/)
+
+**NB** If you want to run without docker you can change the .env file to target the C# Api through localhost. Change the url from /api to localhost:((PORT))/api followed by building the project and everything should work.
+
+### Project structure
+
+The project is using the components to build the whole application. The application uses:
+
+- `/api` as the api integration of the backend
+- `/nginx` for routing request between frontend and backend
+- `/client` as the client side (frontend)

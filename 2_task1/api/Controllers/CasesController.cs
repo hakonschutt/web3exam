@@ -61,7 +61,8 @@ namespace api.Controllers
         {
           try
           {
-              c.id = new Guid();
+                Console.WriteLine("GOT HERER");
+                c.id = new Guid();
 
               if (_caseRepository.Save(c)) {
                 return StatusCode(201, c);

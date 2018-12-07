@@ -2,7 +2,7 @@
 <cases>
   <case>
     <id>5e91e2be-cd22-4db1-a3a6-0e5428a86f56</id>
-    <title>TITLEE</title>
+    <title>TITLEE123</title>
     <description>THIIIISSS is a description</description>
     <persons>
       <person>1</person>
@@ -11,12 +11,12 @@
       <person>4</person>
       <person>Heello</person>
     </persons>
-    <isSolved>true</isSolved>
+    <isSolved>false</isSolved>
   </case>
   <case>
     <id>5e91e2be-cd22-4db1-a3a6-0e5428a86f43</id>
-    <title>Loreem</title>
-    <description>This is a description</description>
+    <title>TEST</title>
+    <description>hello</description>
     <persons>
       <person>1</person>
       <person>2</person>
@@ -36,5 +36,12 @@
       <person>4</person>
     </persons>
     <isSolved>false</isSolved>
+  </case>
+  <case>
+    <id>3c5e0aa0-d10d-40d1-844e-7afbd3b9232f</id>
+    <title>Create booking microservice</title>
+    <description>eweweewe</description>
+    <persons />
+    <isSolved>true</isSolved>
   </case>
 </cases>

@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
+import { withRouter } from "react-router-dom";
+
 import { Jumbotron, PageContext, FormBuilder, Breadcrumb } from "../components";
 import { formValidation } from "../utils/form";
+import { uploadCase } from "../actions";
 
 const formFields = [
   {
@@ -36,8 +40,24 @@ const breadcrumbConfig = [
 ];
 
 class NewCase extends Component {
-  async onSubmit(fields) {
-    console.log(fields);
+  state = {
+    error: ""
+  };
+
+  onSubmit(fields) {
+    const data = {
+      ...fields,
+      isSolved: fields.isSolved.value,
+      persons: []
+    };
+
+    this.props.uploadCase(data, (gotError, msg, id) => {
+      if (gotError) {
+        this.setState({ error: msg });
+      } else {
+        this.props.history.push(`/case/${id}`);
+      }
+    });
   }
 
   render() {
@@ -50,7 +70,7 @@ class NewCase extends Component {
         <section className="container">
           <FormBuilder
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
-            error={""}
+            error={this.state.error}
             formFields={formFields}
           />
         </section>
@@ -66,4 +86,9 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: "newCaseForm"
-})(NewCase);
+})(
+  connect(
+    null,
+    { uploadCase }
+  )(withRouter(NewCase))
+);

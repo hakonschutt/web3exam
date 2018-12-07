@@ -23,7 +23,6 @@ class Selector extends Component {
     } = this.props;
 
     const isFaulty = touched && error;
-    console.log(input.value);
 
     return (
       <div className="form-group">
@@ -35,7 +34,6 @@ class Selector extends Component {
           onChange={this.handleChange.bind(this)}
           isClearable={true}
           options={extraProps.options}
-          {...input}
         />
         {isFaulty && (
           <div className="invalid-feedback" style={{ display: "block" }}>

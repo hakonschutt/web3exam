@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
+import { withRouter } from "react-router-dom";
+
 import { Jumbotron, PageContext, FormBuilder, Breadcrumb } from "../components";
 import { formValidation } from "../utils/form";
+import { updateCase } from "../actions";
 
 const formFields = [
   {
@@ -34,19 +38,15 @@ const formFields = [
 ];
 
 class EditCase extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      breadcrumb: [],
-      data: {
-        title: "",
-        description: "",
-        persons: [],
-        isSolved: null
-      }
-    };
-  }
+  state = {
+    breadcrumb: [],
+    data: {
+      title: "",
+      description: "",
+      persons: [],
+      isSolved: null
+    }
+  };
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -61,7 +61,35 @@ class EditCase extends Component {
   }
 
   async onSubmit(fields) {
-    console.log(fields);
+    const { id } = this.props.match.params;
+
+    const data = {
+      ...fields,
+      isSolved: fields.isSolved.value,
+      persons: []
+    };
+
+    this.props.updateCase(id, data, (gotError, msg, id) => {
+      if (gotError) {
+        this.setState({ error: msg });
+      } else {
+        this.props.history.push(`/case/${id}`);
+      }
+    });
+  }
+
+  componentMount() {
+    const { id } = this.props.match.params;
+    const { cases } = this.props;
+
+    const c = cases.find(cur => {
+      return cur.id === id;
+    });
+
+    this.props.initialize({
+      ...c,
+      isSolved: { value: c.isSolved, label: c.isSolved ? "Yes" : "No" }
+    });
   }
 
   render() {
@@ -77,6 +105,7 @@ class EditCase extends Component {
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
             error={""}
             formFields={formFields}
+            componentMount={this.componentMount.bind(this)}
           />
         </section>
       </PageContext>
@@ -88,7 +117,16 @@ function validate(values) {
   return formValidation(values, formFields);
 }
 
+function mapStateToProps({ cases }) {
+  return { cases };
+}
+
 export default reduxForm({
   validate,
-  form: "newCaseForm"
-})(EditCase);
+  form: "editCaseForm"
+})(
+  connect(
+    mapStateToProps,
+    { updateCase }
+  )(withRouter(EditCase))
+);
