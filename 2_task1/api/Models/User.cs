@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace api.Models
 {
+    /*
+     * User modal for locking variable for a user
+     */
 	public class User
 	{
 		public Guid id { get; set; }

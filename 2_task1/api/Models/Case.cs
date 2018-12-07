@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace api.Models
 {
+    /*
+     * Case modal for variable locking
+     */
 	public class Case
 	{
 		public Guid id { get; set; }

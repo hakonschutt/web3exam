@@ -9,14 +9,23 @@ using api.Models;
 
 namespace api.Converters
 {
+    /*
+     * Case converter interface
+     */
 	public interface ICaseConverter
 	{
 		Case transform(XElement c);
 		XElement transformXml(Case c);
 	}
 
-	public class CaseConverter : ICaseConverter
+    /*
+     * Case converter used to format from request json (modal) to storage xml
+     */
+    public class CaseConverter : ICaseConverter
 	{
+        /*
+         * Transform case xml to case json (modal)
+         */
         public Case transform(XElement c)
         {
     			if (c.IsEmpty) return null;
@@ -32,6 +41,9 @@ namespace api.Converters
     			};
         }
 
+        /*
+         * Transform xml to json case (modal)
+         */
         public XElement transformXml(Case c)
         {
           return new XElement("case",

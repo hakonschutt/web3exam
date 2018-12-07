@@ -7,6 +7,9 @@ using api.Converters;
 
 namespace api.Repositories
 {
+    /*
+     * Case repository interface
+     */
     public interface ICaseRepository
     {
         Case GetById(Guid id);
@@ -17,6 +20,9 @@ namespace api.Repositories
         bool AddPerson(Guid id, string name);
     }
 
+    /*
+     * Case repository for posting and retriving data from database (xml file)
+     */
     public class CaseRepository : ICaseRepository
     {
         private readonly ICaseConverter _caseConverter;
@@ -25,6 +31,9 @@ namespace api.Repositories
           _caseConverter = new CaseConverter();
         }
 
+        /*
+         * Get case by id
+         */
         public Case GetById(Guid id) {
           XElement xmlFile = XElement.Load("xml/cases.xml");
 
@@ -34,6 +43,9 @@ namespace api.Repositories
                         .SingleOrDefault();
         }
 
+        /*
+         * List all cases
+         */
         public List<Case> GetAll() {
           XElement xmlFile = XElement.Load("xml/cases.xml");
 
@@ -42,6 +54,9 @@ namespace api.Repositories
                         .ToList();
         }
 
+        /*
+         * Remove case from database
+         */
         public bool Remove(Guid id) {
           XElement xmlFile = XElement.Load("xml/cases.xml");
 
@@ -57,6 +72,9 @@ namespace api.Repositories
           return true;
         }
 
+        /*
+         * Update case in database
+         */
         public bool Update(Guid id, Case c) {
           XElement xmlFile = XElement.Load("xml/cases.xml");
 
@@ -75,6 +93,9 @@ namespace api.Repositories
           return true;
         }
 
+        /*
+         * Create new case and save in the database
+         */
         public bool Save(Case c) {
           XElement xmlFile = XElement.Load("xml/cases.xml");
 
@@ -88,6 +109,9 @@ namespace api.Repositories
           return true;
         }
 
+        /*
+         * Adds a new person of interest to a given case
+         */
         public bool AddPerson(Guid id, string name) {
           XElement xmlFile = XElement.Load("xml/cases.xml");
 

@@ -12,6 +12,9 @@ using api.Repositories;
 
 namespace api.Controllers
 {
+    /*
+     * Route controlleer for /api/cases 
+     */
     [Route("api/[controller]")]
     [ApiController]
     public class CasesController : ControllerBase
@@ -24,6 +27,9 @@ namespace api.Controllers
             _caseRepository = caseRepository;
         }
 
+        /*
+         * GET route for all cases
+         */
         [HttpGet]
         public ActionResult<IEnumerable<Case>> Get()
         {
@@ -37,6 +43,9 @@ namespace api.Controllers
           }
         }
 
+        /*
+         * GET route for single case by id
+         */
         [HttpGet("{id}")]
         public ActionResult<Case> Get(Guid id)
         {
@@ -56,6 +65,9 @@ namespace api.Controllers
             }
         }
 
+        /*
+         * POST route for init of new case
+         */
         [HttpPost]
         public ActionResult<Case> Post([FromBody] Case c)
         {
@@ -76,6 +88,9 @@ namespace api.Controllers
           }
         }
 
+        /*
+         * POST route for init of new person of interest
+         */
         [HttpPost("{id}/persons")]
         public ActionResult<bool> PostPerson(Guid id, [FromBody] string data)
         {
@@ -93,6 +108,9 @@ namespace api.Controllers
           }
         }
 
+        /*
+         * PUT route for update of case state (Should be patch if following REST convention)
+         */
         [HttpPut("{id}")]
         public ActionResult<Case> Put(Guid id, [FromBody] Case c)
         {
@@ -110,6 +128,9 @@ namespace api.Controllers
             }
         }
 
+        /*
+         * DELETE route for case with given id
+         */
         [HttpDelete("{id}")]
         public ActionResult<bool> Delete(Guid id)
         {
