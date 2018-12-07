@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotFoundPage = () => {
+const NewCase = () => {
   return (
     <div
       className="page-wrap d-flex flex-row align-items-center"
@@ -14,7 +14,7 @@ const NotFoundPage = () => {
             <div className="mb-4 lead">
               {"We can't seem to find the page you're looking for."}
             </div>
-            <Link to="/" class="btn btn-link">
+            <Link to="/" className="btn btn-link">
               Back to Home
             </Link>
           </div>
@@ -24,4 +24,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default NewCase;

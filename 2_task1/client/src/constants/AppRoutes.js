@@ -18,15 +18,26 @@ class AppRoutes extends Component {
             <Route
               exact
               path="/"
-              component={loadablePage(() =>
-                import("../containers/LandingPage")
-              )}
+              component={loadablePage(() => import("../containers/Cases"))}
+            />
+            <Route
+              exact
+              path="/case/new"
+              component={loadablePage(() => import("../containers/NewCase"))}
+            />
+            <Route
+              exact
+              path="/case/:id"
+              component={loadablePage(() => import("../containers/SingleCase"))}
+            />
+            <Route
+              exact
+              path="/case/:id/edit"
+              component={loadablePage(() => import("../containers/EditCase"))}
             />
             <Route
               path="/404"
-              component={loadablePage(() =>
-                import("../containers/NotFoundPage")
-              )}
+              component={loadablePage(() => import("../containers/NotFound"))}
             />
             <Redirect to="/404" />
           </Switch>
