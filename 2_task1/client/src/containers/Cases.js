@@ -6,9 +6,12 @@ import {
   Jumbotron,
   PageContext,
   CaseTableHeader,
-  CaseTableItem
+  CaseTableItem,
+  Breadcrumb
 } from "../components";
 import { fetchCases } from "../actions";
+
+const breadcrumbConfig = [{ active: false, to: "/", title: "Cases" }];
 
 class Cases extends Component {
   constructor(props) {
@@ -30,6 +33,7 @@ class Cases extends Component {
   render() {
     return (
       <PageContext>
+        <Breadcrumb args={breadcrumbConfig} />
         <Jumbotron header="Cases" />
         <section className="cases-table">
           <div className="container">

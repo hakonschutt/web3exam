@@ -1,27 +1,69 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { reduxForm } from "redux-form";
+import { Jumbotron, PageContext, FormBuilder, Breadcrumb } from "../components";
+import { formValidation } from "../utils/form";
 
-const NewCase = () => {
-  return (
-    <div
-      className="page-wrap d-flex flex-row align-items-center"
-      style={{ minHeight: "calc(100vh - 100px)" }}
-    >
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-12 text-center">
-            <span className="display-1 d-block">404</span>
-            <div className="mb-4 lead">
-              {"We can't seem to find the page you're looking for."}
-            </div>
-            <Link to="/" className="btn btn-link">
-              Back to Home
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+const formFields = [
+  {
+    label: "Title",
+    type: "text",
+    input: "text",
+    name: "title",
+    error: "Need to include a title"
+  },
+  {
+    label: "Description",
+    type: "text",
+    input: "textarea",
+    name: "description",
+    error: "Need to include a description"
+  },
+  {
+    label: "Solved",
+    type: "text",
+    input: "select",
+    name: "isSolved",
+    error: "Need to include a solved flag",
+    extraProps: {
+      options: [{ value: true, label: "Yes" }, { value: false, label: "No" }]
+    }
+  }
+];
 
-export default NewCase;
+const breadcrumbConfig = [
+  { active: true, to: "/", title: "Cases" },
+  { active: false, to: "/case/new", title: "New" }
+];
+
+class NewCase extends Component {
+  async onSubmit(fields) {
+    console.log(fields);
+  }
+
+  render() {
+    const { handleSubmit } = this.props;
+
+    return (
+      <PageContext>
+        <Breadcrumb args={breadcrumbConfig} />
+        <Jumbotron header="New case" />
+        <section className="container">
+          <FormBuilder
+            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            error={""}
+            formFields={formFields}
+          />
+        </section>
+      </PageContext>
+    );
+  }
+}
+
+function validate(values) {
+  return formValidation(values, formFields);
+}
+
+export default reduxForm({
+  validate,
+  form: "newCaseForm"
+})(NewCase);

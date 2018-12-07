@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Jumbotron = ({ header, lead }) => {
   return (
-    <section className="jumbotron jumbotron-fluid">
+    <section className="jumbotron jumbotron-fluid bg-light">
       <div className="container">
         <h1 className="display-4">{header}</h1>
         {lead && <p className="lead">{lead}</p>}

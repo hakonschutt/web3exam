@@ -1,27 +1,68 @@
-import React from "react";
+import React, { Component } from "react";
+import { Jumbotron, PageContext, Breadcrumb } from "../components";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const SingleCase = () => {
-  return (
-    <div
-      className="page-wrap d-flex flex-row align-items-center"
-      style={{ minHeight: "calc(100vh - 100px)" }}
-    >
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-12 text-center">
-            <span className="display-1 d-block">404</span>
-            <div className="mb-4 lead">
-              {"We can't seem to find the page you're looking for."}
-            </div>
-            <Link to="/" className="btn btn-link">
-              Back to Home
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+class SingleCase extends Component {
+  constructor(props) {
+    super(props);
 
-export default SingleCase;
+    this.state = {
+      breadcrumb: [],
+      data: {
+        title: "",
+        description: "",
+        persons: [],
+        isSolved: null
+      }
+    };
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+
+    const data = this.props.cases.find(el => el.id === id);
+
+    this.setState({
+      breadcrumb: [
+        { active: true, to: "/", title: "Cases" },
+        { active: false, to: `/case/${id}`, title: id }
+      ],
+      data: data ? data : this.state.data
+    });
+  }
+
+  render() {
+    const { id } = this.props.match.params;
+    const { data, breadcrumb } = this.state;
+
+    console.log(data);
+
+    return (
+      <PageContext>
+        <Breadcrumb args={breadcrumb} />
+        <Jumbotron header={data.title} lead={data.description} />
+        <div className="container">
+          <h2 className="py-2">People</h2>
+          <ul className="list-group list-group-flush my-2">
+            {data.persons.map(per => (
+              <li className="list-group-item">{per}</li>
+            ))}
+          </ul>
+          <Link
+            to={`/case/${id}/edit`}
+            class="btn btn-primary btn-lg btn-block my-3"
+          >
+            Edit
+          </Link>
+        </div>
+      </PageContext>
+    );
+  }
+}
+
+function mapStateToProps({ cases }) {
+  return { cases };
+}
+
+export default connect(mapStateToProps)(SingleCase);

@@ -12,6 +12,9 @@ const CaseTableItem = ({ index, id, title, persons, isSolved }) => {
       <th scope="col">
         <Link to={`/case/${id}`}>View</Link>
       </th>
+      <th scope="col">
+        <Link to={`/case/${id}/edit`}>Edit</Link>
+      </th>
     </tr>
   );
 };
